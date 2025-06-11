@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Countdown to End of Exams 🎉</title>
+<title>Interactive Countdown with Confetti 🎉</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
 
@@ -37,10 +37,11 @@
     padding: 25px 30px;
     border-radius: 12px;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-    cursor: default;
+    cursor: pointer;
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     min-width: 70px;
+    user-select: none;
   }
 
   .time-segment:hover, .time-segment:focus {
@@ -86,12 +87,13 @@
   </div>
 </div>
 
+<!-- Include canvas-confetti library -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
 <script>
   function updateCountdown() {
     const now = new Date();
 
-    // Set your exam end date here:
-    // For example, Friday at 3:30 PM this week or next if past:
     const target = new Date();
     target.setDate(target.getDate() + ((5 - target.getDay() + 7) % 7)); // Next Friday
     target.setHours(15, 30, 0, 0); // 3:30 PM
@@ -116,6 +118,27 @@
     document.getElementById("minutes").textContent = minutes;
     document.getElementById("seconds").textContent = seconds;
   }
+
+  // Confetti burst function
+  function confettiBurst(element) {
+    const rect = element.getBoundingClientRect();
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
+
+    confetti({
+      particleCount: 30,
+      spread: 70,
+      origin: {
+        x: x / window.innerWidth,
+        y: y / window.innerHeight
+      }
+    });
+  }
+
+  document.querySelectorAll('.time-segment').forEach(segment => {
+    segment.addEventListener('mouseenter', () => confettiBurst(segment));
+    segment.addEventListener('focus', () => confettiBurst(segment));
+  });
 
   setInterval(updateCountdown, 1000);
   updateCountdown();
