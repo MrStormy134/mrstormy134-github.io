@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Countdown Timer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+      background-color: #f0f0f0;
+    }
+    #countdown {
+      font-size: 2rem;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Countdown to Friday 3:50 PM</h1>
+  <div id="countdown"></div>
+
+  <script>
+    function updateCountdown() {
+      const target = new Date();
+      target.setDate(target.getDate() + ((5 - target.getDay() + 7) % 7)); // Next Friday
+      target.setHours(15, 50, 0, 0); // 3:50 PM
+
+      const now = new Date();
+      const diff = target - now;
+
+      if (diff < 0) {
+        document.getElementById("countdown").innerText = "Time's up!";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById("countdown").innerText =
+        `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+</body>
+</html>
