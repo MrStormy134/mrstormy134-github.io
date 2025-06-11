@@ -45,6 +45,12 @@
     display: flex;
     gap: 25px;
     z-index: 10;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    max-width: 600px;
+    padding: 0 10px;
+    box-sizing: border-box;
   }
 
   .time-box {
@@ -53,7 +59,7 @@
     padding: 20px 35px;
     border-radius: 15px;
     color: #004080;
-    min-width: 90px;
+    min-width: 120px;
     font-weight: 600;
     font-size: 2.5rem;
     text-align: center;
@@ -75,6 +81,7 @@
     bottom: -4px;
     border-radius: 19px;
 
+    /* Static multicolor gradient around the border */
     background: conic-gradient(
       from 0deg,
       #ff6ec4,
@@ -92,17 +99,7 @@
     -webkit-mask-composite: destination-out;
     mask-composite: exclude;
 
-    animation: borderColorShift 6s linear infinite;
-    transform-origin: center center;
-  }
-
-  @keyframes borderColorShift {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
+    /* Remove animation to stop spinning */
   }
 
   .time-box:hover {
@@ -165,16 +162,17 @@
       padding: 0 10px;
     }
     #countdown {
-      flex-wrap: wrap;
-      justify-content: center;
       gap: 15px;
-      width: 90vw;
+      max-width: 100%;
+      width: 100%;
     }
     .time-box {
-      min-width: 40vw;
+      flex: 1 1 45%; /* Let each box take about half the width */
+      min-width: unset;
       font-size: 3rem;
       padding: 25px 0;
       border-radius: 20px;
+      max-width: 200px; /* optional max width so it doesn’t get huge on big phones */
     }
     .label {
       font-size: 1.1rem;
