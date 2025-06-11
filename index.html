@@ -35,6 +35,8 @@
   #confetti-emoji {
     cursor: pointer;
     user-select: none;
+    display: inline-block;
+    position: relative;
   }
 
   #countdown {
@@ -70,6 +72,8 @@
     right: -4px;
     bottom: -4px;
     border-radius: 19px;
+
+    /* The conic-gradient ring */
     background: conic-gradient(
       from 0deg,
       #ff6ec4,
@@ -78,15 +82,19 @@
       #ff6ec4,
       #42d4f4
     );
+
     z-index: -1;
 
+    /* Mask to show only the border ring */
     -webkit-mask:
       linear-gradient(#fff 0 0) content-box,
       linear-gradient(#fff 0 0);
     -webkit-mask-composite: destination-out;
     mask-composite: exclude;
 
+    /* Animate the rotation */
     animation: borderColorShift 6s linear infinite;
+    transform-origin: center center;
   }
 
   @keyframes borderColorShift {
@@ -205,11 +213,11 @@
   const motivateBtn = document.getElementById("motivate-btn");
   const confettiEmoji = document.getElementById('confetti-emoji');
 
-  function confettiBurst() {
+  function confettiBurst(x, y) {
     confetti({
       particleCount: 60,
       spread: 70,
-      origin: { y: 0.6 }
+      origin: { x: x, y: y }
     });
   }
 
@@ -249,7 +257,12 @@
     secondsNumber.textContent = seconds;
 
     if (minutes !== previousMinutes) {
-      confettiBurst();
+      // Get emoji position on screen as normalized viewport coords [0-1]
+      const rect = confettiEmoji.getBoundingClientRect();
+      const x = (rect.left + rect.width / 2) / window.innerWidth;
+      const y = (rect.top + rect.height / 2) / window.innerHeight;
+
+      confettiBurst(x, y);
       previousMinutes = minutes;
 
       currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
@@ -263,10 +276,14 @@
   });
 
   confettiEmoji.addEventListener('mouseenter', () => {
+    const rect = confettiEmoji.getBoundingClientRect();
+    const x = (rect.left + rect.width / 2) / window.innerWidth;
+    const y = (rect.top + rect.height / 2) / window.innerHeight;
+
     confetti({
       particleCount: 100,
       spread: 100,
-      origin: { y: 0.6 }
+      origin: { x: x, y: y }
     });
   });
 
