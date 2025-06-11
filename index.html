@@ -1,50 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Countdown Timer</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 50px;
-      background-color: #f0f0f0;
-    }
-    #countdown {
-      font-size: 2rem;
-      margin-top: 20px;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Countdown to End of Exams 🎉</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+  body {
+    margin: 0;
+    height: 100vh;
+    background-color: #dde7f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    color: #222;
+    flex-direction: column;
+    user-select: none;
+  }
+
+  h1 {
+    margin-bottom: 30px;
+    font-weight: 600;
+    font-size: 2rem;
+    letter-spacing: 2px;
+  }
+
+  .countdown {
+    display: flex;
+    gap: 25px;
+  }
+
+  .time-segment {
+    background: #f9fbff;
+    padding: 25px 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    cursor: default;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-width: 70px;
+  }
+
+  .time-segment:hover, .time-segment:focus {
+    transform: scale(1.2);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+    outline: none;
+  }
+
+  .number {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #003366;
+  }
+
+  .label {
+    font-size: 1.1rem;
+    margin-top: 8px;
+    font-weight: 600;
+    color: #004080;
+    text-transform: uppercase;
+  }
+</style>
 </head>
 <body>
-  <h1>Countdown to end of exams 🎉</h1>
-  <div id="countdown"></div>
 
-  <script>
-    function updateCountdown() {
-      const target = new Date();
-      target.setDate(target.getDate() + ((5 - target.getDay() + 7) % 7)); // Next Friday
-      target.setHours(15, 30, 0, 0); // 3:30 PM
+<h1>Countdown to End of Exams 🎉</h1>
+<div class="countdown" aria-label="Countdown timer">
+  <div class="time-segment" tabindex="0" role="timer" aria-live="polite">
+    <div class="number" id="days">0</div>
+    <div class="label">Days</div>
+  </div>
+  <div class="time-segment" tabindex="0" role="timer" aria-live="polite">
+    <div class="number" id="hours">0</div>
+    <div class="label">Hours</div>
+  </div>
+  <div class="time-segment" tabindex="0" role="timer" aria-live="polite">
+    <div class="number" id="minutes">0</div>
+    <div class="label">Minutes</div>
+  </div>
+  <div class="time-segment" tabindex="0" role="timer" aria-live="polite">
+    <div class="number" id="seconds">0</div>
+    <div class="label">Seconds</div>
+  </div>
+</div>
 
-      const now = new Date();
-      const diff = target - now;
+<script>
+  function updateCountdown() {
+    const now = new Date();
 
-      if (diff < 0) {
-        document.getElementById("countdown").innerText = "Time's up!";
-        return;
-      }
+    // Set your exam end date here:
+    // For example, Friday at 3:30 PM this week or next if past:
+    const target = new Date();
+    target.setDate(target.getDate() + ((5 - target.getDay() + 7) % 7)); // Next Friday
+    target.setHours(15, 30, 0, 0); // 3:30 PM
 
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / (1000 * 60)) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
+    const diff = target - now;
 
-      document.getElementById("countdown").innerText =
-        `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    if (diff < 0) {
+      document.getElementById("days").textContent = 0;
+      document.getElementById("hours").textContent = 0;
+      document.getElementById("minutes").textContent = 0;
+      document.getElementById("seconds").textContent = 0;
+      return;
     }
 
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
-  </script>
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    document.getElementById("days").textContent = days;
+    document.getElementById("hours").textContent = hours;
+    document.getElementById("minutes").textContent = minutes;
+    document.getElementById("seconds").textContent = seconds;
+  }
+
+  setInterval(updateCountdown, 1000);
+  updateCountdown();
+</script>
+
 </body>
 </html>
