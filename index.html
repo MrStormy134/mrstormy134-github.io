@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Countdown Timer</title>
   <style>
     body {
@@ -17,14 +17,14 @@
   </style>
 </head>
 <body>
-  <h1>Countdown to Friday 3:50 PM</h1>
+  <h1>Countdown to end of exams 🎉</h1>
   <div id="countdown"></div>
 
   <script>
     function updateCountdown() {
       const target = new Date();
       target.setDate(target.getDate() + ((5 - target.getDay() + 7) % 7)); // Next Friday
-      target.setHours(15, 50, 0, 0); // 3:50 PM
+      target.setHours(15, 30, 0, 0); // 3:30 PM
 
       const now = new Date();
       const diff = target - now;
