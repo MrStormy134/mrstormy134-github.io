@@ -1,269 +1,270 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Countdown to End of Exams 🎉</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+<meta charset="UTF-8" />
+<title>Countdown to End of Exams 🎉</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
 
-    html, body {
-      margin: 0; padding: 0; height: 100%;
-      background: #a8d0ff; /* Soft light blue */
-      font-family: 'Poppins', sans-serif;
-      color: #222;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      animation: fadeIn 1.5s ease forwards;
-    }
+  html, body {
+    margin: 0; padding: 0; height: 100%;
+    background: #a8d0ff; /* Soft light blue */
+    font-family: 'Poppins', sans-serif;
+    color: #222;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 1.5s ease forwards;
+  }
 
-    /* Fade in page */
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
+  /* Fade in page */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
 
-    h1 {
-      margin-bottom: 40px;
-      font-size: 2.5rem;
-      z-index: 10;
-      text-align: center;
-      color: #004080;
-      text-shadow: 0 0 6px #66a3ff88;
-    }
+  h1 {
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+    z-index: 10;
+    text-align: center;
+    color: #004080;
+    text-shadow: 0 0 6px #66a3ff88;
+  }
 
-    /* Countdown container */
-    #countdown {
-      display: flex;
-      gap: 25px;
-      z-index: 10;
-    }
+  /* Countdown container */
+  #countdown {
+    display: flex;
+    gap: 25px;
+    z-index: 10;
+  }
 
-    /* Each time box */
-    .time-box {
-      background: #e3f0ff;
-      padding: 20px 35px;
-      border-radius: 15px;
-      position: relative;
-      cursor: default;
-      transition: transform 0.3s ease;
-      color: #004080;
-      text-align: center;
-      min-width: 90px;
-      user-select: none;
-      font-weight: 600;
-      font-size: 2.5rem;
-      font-variant-numeric: tabular-nums;
-      z-index: 10;
-      box-shadow: 0 0 12px #90caff88;
-      border: 4px solid transparent; /* to make space for border */
-      background-clip: padding-box;
-    }
+  /* Each time box */
+  .time-box {
+    position: relative;
+    background: #e3f0ff;
+    padding: 20px 35px;
+    border-radius: 15px;
+    color: #004080;
+    min-width: 90px;
+    font-weight: 600;
+    font-size: 2.5rem;
+    text-align: center;
+    box-shadow: 0 0 12px #90caff88;
+    user-select: none;
+    cursor: default;
 
-    /* Neon multi-color animated border */
-    .time-box::before {
-      content: '';
-      position: absolute;
-      top: -4px; left: -4px; right: -4px; bottom: -4px;
-      border-radius: 19px;
-      padding: 4px;
-      background: conic-gradient(
-        from 0deg,
-        #ff6ec4,
-        #42d4f4,
-        #6effa6,
-        #ff6ec4,
-        #42d4f4
-      );
-      -webkit-mask:
-        linear-gradient(#fff 0 0) content-box, 
-        linear-gradient(#fff 0 0);
-      -webkit-mask-composite: destination-out;
-      mask-composite: exclude;
-      animation: borderShift 6s linear infinite;
-      pointer-events: none;
-      z-index: -1;
-    }
+    /* Space for border glow */
+    border: 4px solid transparent;
+    background-clip: padding-box;
+    z-index: 10;
+  }
 
-    /* Animate background position around edges */
-    @keyframes borderShift {
-      0% {
-        transform: rotate(0deg);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
-    }
+  /* Neon multi-color animated border */
+  .time-box::before {
+    content: '';
+    position: absolute;
+    top: -4px; left: -4px; right: -4px; bottom: -4px;
+    border-radius: 19px;
+    background: conic-gradient(
+      from 0deg,
+      #ff6ec4,
+      #42d4f4,
+      #6effa6,
+      #ff6ec4,
+      #42d4f4
+    );
+    z-index: -1;
 
-    /* Hover enlarge with smooth scale */
-    .time-box:hover {
-      transform: scale(1.25);
-      box-shadow: 0 0 20px #42d4f4, 0 0 35px #6effa6;
-      z-index: 20;
-    }
+    /* Show only on border */
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
 
-    /* Label below each number */
-    .label {
-      font-size: 1rem;
-      font-weight: 500;
-      margin-top: 5px;
-      color: #004080aa;
-      user-select: none;
-    }
+    /* Animate color shift around border */
+    animation: borderColorShift 6s linear infinite;
+  }
 
-    /* Motivational quote box */
-    #quote-box {
-      margin-top: 40px;
-      max-width: 600px;
-      font-size: 1.3rem;
-      font-style: italic;
-      text-align: center;
-      color: #0066cc;
-      min-height: 70px;
-      opacity: 0;
-      transition: opacity 1s ease;
-      user-select: none;
-      z-index: 10;
+  @keyframes borderColorShift {
+    0% {
+      background: conic-gradient(from 0deg, #ff6ec4, #42d4f4, #6effa6, #ff6ec4, #42d4f4);
     }
+    100% {
+      background: conic-gradient(from 360deg, #ff6ec4, #42d4f4, #6effa6, #ff6ec4, #42d4f4);
+    }
+  }
 
-    #quote-box.visible {
-      opacity: 1;
-    }
+  /* Hover enlarge with smooth scale */
+  .time-box:hover {
+    transform: scale(1.25);
+    box-shadow: 0 0 20px #42d4f4, 0 0 35px #6effa6;
+    z-index: 20;
+  }
 
-    /* Motivate Me button */
-    #motivate-btn {
-      margin-top: 25px;
-      padding: 10px 30px;
-      background: linear-gradient(45deg, #42d4f4, #6effa6);
-      border: none;
-      border-radius: 25px;
-      color: #004080;
-      font-size: 1.1rem;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 0 15px #42d4f4aa, 0 0 25px #6effa6aa;
-      transition: background 0.3s ease;
-      user-select: none;
-      z-index: 10;
-    }
-    #motivate-btn:hover {
-      background: linear-gradient(45deg, #3399cc, #33cc99);
-    }
+  /* Label below each number */
+  .label {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-top: 5px;
+    color: #004080aa;
+    user-select: none;
+  }
 
-  </style>
+  /* Motivational quote box */
+  #quote-box {
+    margin-top: 40px;
+    max-width: 600px;
+    font-size: 1.3rem;
+    font-style: italic;
+    text-align: center;
+    color: #0066cc;
+    min-height: 70px;
+    opacity: 0;
+    transition: opacity 1s ease;
+    user-select: none;
+    z-index: 10;
+  }
+
+  #quote-box.visible {
+    opacity: 1;
+  }
+
+  /* Motivate Me button */
+  #motivate-btn {
+    margin-top: 25px;
+    padding: 10px 30px;
+    background: linear-gradient(45deg, #42d4f4, #6effa6);
+    border: none;
+    border-radius: 25px;
+    color: #004080;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 0 15px #42d4f4aa, 0 0 25px #6effa6aa;
+    transition: background 0.3s ease;
+    user-select: none;
+    z-index: 10;
+  }
+  #motivate-btn:hover {
+    background: linear-gradient(45deg, #3399cc, #33cc99);
+  }
+</style>
 </head>
 <body>
 
-  <h1>Countdown to End of Exams 🎉</h1>
+<h1>Countdown to End of Exams 🎉</h1>
 
-  <div id="countdown">
-    <div class="time-box">
-      <div id="days-number">0</div>
-      <div class="label">Days</div>
-    </div>
-    <div class="time-box">
-      <div id="hours-number">0</div>
-      <div class="label">Hours</div>
-    </div>
-    <div class="time-box">
-      <div id="minutes-number">0</div>
-      <div class="label">Minutes</div>
-    </div>
-    <div class="time-box">
-      <div id="seconds-number">0</div>
-      <div class="label">Seconds</div>
-    </div>
+<div id="countdown">
+  <div class="time-box">
+    <div id="days-number">0</div>
+    <div class="label">Days</div>
   </div>
+  <div class="time-box">
+    <div id="hours-number">0</div>
+    <div class="label">Hours</div>
+  </div>
+  <div class="time-box">
+    <div id="minutes-number">0</div>
+    <div class="label">Minutes</div>
+  </div>
+  <div class="time-box">
+    <div id="seconds-number">0</div>
+    <div class="label">Seconds</div>
+  </div>
+</div>
 
-  <div id="quote-box"></div>
-  <button id="motivate-btn">Motivate Me!</button>
+<div id="quote-box"></div>
+<button id="motivate-btn">Motivate Me!</button>
 
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-  <script>
-    const quotes = [
-      "Believe you can and you're halfway there.",
-      "Success is not final, failure is not fatal: It is the courage to continue that counts.",
-      "Don’t watch the clock; do what it does. Keep going.",
-      "The future depends on what you do today.",
-      "You are capable of amazing things.",
-      "Push yourself, because no one else is going to do it for you.",
-      "Stay positive, work hard, make it happen.",
-      "Your limitation—it’s only your imagination.",
-      "Sometimes later becomes never. Do it now.",
-      "Great things never come from comfort zones.",
-    ];
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+<script>
+  const quotes = [
+    "Believe you can and you're halfway there.",
+    "Success is not final, failure is not fatal: It is the courage to continue that counts.",
+    "Don’t watch the clock; do what it does. Keep going.",
+    "The future depends on what you do today.",
+    "You are capable of amazing things.",
+    "Push yourself, because no one else is going to do it for you.",
+    "Stay positive, work hard, make it happen.",
+    "Your limitation—it’s only your imagination.",
+    "Sometimes later becomes never. Do it now.",
+    "Great things never come from comfort zones.",
+  ];
 
-    let previousMinutes = null;
-    let currentQuoteIndex = 0;
+  let previousMinutes = null;
+  let currentQuoteIndex = 0;
 
-    const daysNumber = document.getElementById("days-number");
-    const hoursNumber = document.getElementById("hours-number");
-    const minutesNumber = document.getElementById("minutes-number");
-    const secondsNumber = document.getElementById("seconds-number");
-    const quoteBox = document.getElementById("quote-box");
-    const motivateBtn = document.getElementById("motivate-btn");
+  const daysNumber = document.getElementById("days-number");
+  const hoursNumber = document.getElementById("hours-number");
+  const minutesNumber = document.getElementById("minutes-number");
+  const secondsNumber = document.getElementById("seconds-number");
+  const quoteBox = document.getElementById("quote-box");
+  const motivateBtn = document.getElementById("motivate-btn");
 
-    function confettiBurst() {
-      confetti({
-        particleCount: 60,
-        spread: 70,
-        origin: { y: 0.6 }
-      });
+  function confettiBurst() {
+    confetti({
+      particleCount: 60,
+      spread: 70,
+      origin: { y: 0.6 }
+    });
+  }
+
+  function showQuote(index) {
+    quoteBox.classList.remove("visible");
+    setTimeout(() => {
+      quoteBox.textContent = quotes[index];
+      quoteBox.classList.add("visible");
+    }, 400);
+  }
+
+  function updateCountdown() {
+    const target = new Date();
+    // Set your exam end date/time here:
+    target.setFullYear(2025, 5, 20); // June 20, 2025
+    target.setHours(15, 30, 0, 0); // 3:30 PM
+
+    const now = new Date();
+    const diff = target - now;
+
+    if (diff < 0) {
+      daysNumber.textContent = 0;
+      hoursNumber.textContent = 0;
+      minutesNumber.textContent = 0;
+      secondsNumber.textContent = 0;
+      quoteBox.textContent = "Time's up! 🎉 You made it!";
+      return;
     }
 
-    function showQuote(index) {
-      quoteBox.classList.remove("visible");
-      setTimeout(() => {
-        quoteBox.textContent = quotes[index];
-        quoteBox.classList.add("visible");
-      }, 400);
-    }
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
 
-    function updateCountdown() {
-      const target = new Date();
-      // Set your exam end date/time here:
-      target.setFullYear(2025, 5, 20); // June 20, 2025
-      target.setHours(15, 30, 0, 0); // 3:30 PM
+    daysNumber.textContent = days;
+    hoursNumber.textContent = hours;
+    minutesNumber.textContent = minutes;
+    secondsNumber.textContent = seconds;
 
-      const now = new Date();
-      const diff = target - now;
+    if (minutes !== previousMinutes) {
+      confettiBurst();
+      previousMinutes = minutes;
 
-      if (diff < 0) {
-        daysNumber.textContent = 0;
-        hoursNumber.textContent = 0;
-        minutesNumber.textContent = 0;
-        secondsNumber.textContent = 0;
-        quoteBox.textContent = "Time's up! 🎉 You made it!";
-        return;
-      }
-
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / (1000 * 60)) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
-
-      daysNumber.textContent = days;
-      hoursNumber.textContent = hours;
-      minutesNumber.textContent = minutes;
-      secondsNumber.textContent = seconds;
-
-      if (minutes !== previousMinutes) {
-        confettiBurst();
-        previousMinutes = minutes;
-
-        currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
-        showQuote(currentQuoteIndex);
-      }
-    }
-
-    motivateBtn.addEventListener("click", () => {
       currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
       showQuote(currentQuoteIndex);
-    });
+    }
+  }
 
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
-  </script>
+  motivateBtn.addEventListener("click", () => {
+    currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
+    showQuote(currentQuoteIndex);
+  });
+
+  setInterval(updateCountdown, 1000);
+  updateCountdown();
+</script>
+
 </body>
 </html>
