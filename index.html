@@ -1,274 +1,231 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Countdown with Neon Glowing Borders & Motivational Quotes 🎉</title>
+  <title>Countdown to End of Exams 🎉</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
 
-    body {
-      margin: 0;
-      height: 100vh;
-      background-color: #121212;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    html, body {
+      margin: 0; padding: 0; height: 100%;
+      background: #a8d0ff; /* Soft light blue */
       font-family: 'Poppins', sans-serif;
-      color: #eee;
+      color: #222;
+      display: flex;
       flex-direction: column;
-      user-select: none;
-      opacity: 0;
-      animation: fadeIn 1.2s forwards;
-      padding: 20px;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 1.5s ease forwards;
     }
 
+    /* Fade in page */
     @keyframes fadeIn {
-      to {
-        opacity: 1;
-      }
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     h1 {
-      margin-bottom: 30px;
-      font-weight: 600;
-      font-size: 2rem;
-      letter-spacing: 2px;
-      color: #0ff;
-      text-shadow:
-        0 0 8px #0ff,
-        0 0 20px #0ff;
+      margin-bottom: 40px;
+      font-size: 2.5rem;
+      z-index: 10;
+      text-align: center;
+      color: #004080;
+      text-shadow: 0 0 6px #66a3ff88;
     }
 
-    .countdown {
+    /* Countdown container */
+    #countdown {
       display: flex;
       gap: 25px;
-      margin-bottom: 40px;
+      z-index: 10;
     }
 
-    .time-segment {
+    /* Each time box */
+    .time-box {
+      background: #e3f0ff;
+      padding: 20px 35px;
+      border-radius: 15px;
+      box-shadow: 0 0 12px #90caff88;
       position: relative;
-      background: #1e1e1e;
-      padding: 25px 30px;
-      border-radius: 12px;
-      box-shadow:
-        0 0 8px rgba(0,0,0,0.7),
-        inset 0 0 10px rgba(0,0,0,0.8);
       cursor: default;
-      text-align: center;
       transition: transform 0.3s ease;
-      min-width: 80px;
+      color: #004080;
+      text-align: center;
+      min-width: 90px;
       user-select: none;
-      overflow: visible;
-      border: 3px solid transparent;
-      animation: neonBorderCycle 12s linear infinite;
-    }
-
-    .time-segment:hover,
-    .time-segment:focus {
-      transform: scale(1.15);
-      outline: none;
-      box-shadow:
-        0 0 18px #fff,
-        inset 0 0 20px #0ff;
-    }
-
-    .number {
-      font-size: 3rem;
-      font-weight: 700;
-      color: #0ff;
-      text-shadow:
-        0 0 8px #0ff,
-        0 0 20px #0ff;
-      user-select: none;
-      pointer-events: none;
-    }
-
-    .label {
-      font-size: 1.1rem;
-      margin-top: 8px;
       font-weight: 600;
-      color: #66ffff;
-      text-transform: uppercase;
-      user-select: none;
-      pointer-events: none;
-      text-shadow: 0 0 6px #0ff;
+      font-size: 2.5rem;
+      font-variant-numeric: tabular-nums;
+      z-index: 10;
     }
 
-    @keyframes neonBorderCycle {
+    /* Neon multi-color rotating border */
+    .time-box::before {
+      content: '';
+      position: absolute;
+      top: -5px; left: -5px; right: -5px; bottom: -5px;
+      border-radius: 20px;
+      background: conic-gradient(
+        from 0deg,
+        #ff6ec4,
+        #42d4f4,
+        #ff6ec4,
+        #6effa6,
+        #42d4f4
+      );
+      animation: neonRotate 6s linear infinite;
+      z-index: -1;
+      filter: blur(10px);
+    }
+
+    @keyframes neonRotate {
       0% {
-        border-color: #0ff;
-        box-shadow: 0 0 8px #0ff, inset 0 0 10px #0ff;
-      }
-      25% {
-        border-color: #ff00ff;
-        box-shadow: 0 0 8px #ff00ff, inset 0 0 10px #ff00ff;
-      }
-      50% {
-        border-color: #00ffea;
-        box-shadow: 0 0 8px #00ffea, inset 0 0 10px #00ffea;
-      }
-      75% {
-        border-color: #ff1493;
-        box-shadow: 0 0 8px #ff1493, inset 0 0 10px #ff1493;
+        transform: rotate(0deg);
       }
       100% {
-        border-color: #0ff;
-        box-shadow: 0 0 8px #0ff, inset 0 0 10px #0ff;
+        transform: rotate(360deg);
       }
     }
 
-    #quote-container {
+    /* Hover enlarge with smooth scale */
+    .time-box:hover {
+      transform: scale(1.25);
+      box-shadow: 0 0 20px #42d4f4, 0 0 35px #6effa6;
+      z-index: 20;
+    }
+
+    /* Label below each number */
+    .label {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-top: 5px;
+      color: #004080aa;
+      user-select: none;
+    }
+
+    /* Motivational quote box */
+    #quote-box {
+      margin-top: 40px;
       max-width: 600px;
       font-size: 1.3rem;
       font-style: italic;
       text-align: center;
-      color: #a0f0ff;
-      margin-bottom: 25px;
-      min-height: 60px;
+      color: #0066cc;
+      min-height: 70px;
+      opacity: 0;
+      transition: opacity 1s ease;
       user-select: none;
-      text-shadow:
-        0 0 6px #66ffff;
-      transition: opacity 0.6s ease;
+      z-index: 10;
     }
 
-    #motivate-button {
-      background: linear-gradient(45deg, #00ffff, #ff00ff);
+    #quote-box.visible {
+      opacity: 1;
+    }
+
+    /* Motivate Me button */
+    #motivate-btn {
+      margin-top: 25px;
+      padding: 10px 30px;
+      background: linear-gradient(45deg, #42d4f4, #6effa6);
       border: none;
-      border-radius: 30px;
-      padding: 12px 32px;
+      border-radius: 25px;
+      color: #004080;
       font-size: 1.1rem;
-      color: white;
+      font-weight: 600;
       cursor: pointer;
-      box-shadow:
-        0 0 12px #00ffff,
-        0 0 24px #ff00ff;
-      transition: box-shadow 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 0 15px #42d4f4aa, 0 0 25px #6effa6aa;
+      transition: background 0.3s ease;
       user-select: none;
+      z-index: 10;
+    }
+    #motivate-btn:hover {
+      background: linear-gradient(45deg, #3399cc, #33cc99);
     }
 
-    #motivate-button:hover {
-      box-shadow:
-        0 0 20px #00ffff,
-        0 0 40px #ff00ff;
-      transform: scale(1.1);
-    }
-
-    #motivate-button:focus {
-      outline: none;
-      box-shadow:
-        0 0 24px #00ffff,
-        0 0 48px #ff00ff;
-    }
   </style>
 </head>
 <body>
 
   <h1>Countdown to End of Exams 🎉</h1>
-  <div class="countdown" aria-label="Countdown timer">
-    <div class="time-segment" tabindex="0" role="timer" aria-live="polite" id="days">
-      <div class="number" id="days-number">0</div>
+
+  <div id="countdown">
+    <div class="time-box">
+      <div id="days-number">0</div>
       <div class="label">Days</div>
     </div>
-    <div class="time-segment" tabindex="0" role="timer" aria-live="polite" id="hours">
-      <div class="number" id="hours-number">0</div>
+    <div class="time-box">
+      <div id="hours-number">0</div>
       <div class="label">Hours</div>
     </div>
-    <div class="time-segment" tabindex="0" role="timer" aria-live="polite" id="minutes">
-      <div class="number" id="minutes-number">0</div>
+    <div class="time-box">
+      <div id="minutes-number">0</div>
       <div class="label">Minutes</div>
     </div>
-    <div class="time-segment" tabindex="0" role="timer" aria-live="polite" id="seconds">
-      <div class="number" id="seconds-number">0</div>
+    <div class="time-box">
+      <div id="seconds-number">0</div>
       <div class="label">Seconds</div>
     </div>
   </div>
 
-  <div id="quote-container" aria-live="polite" aria-atomic="true"></div>
+  <div id="quote-box"></div>
+  <button id="motivate-btn">Motivate Me!</button>
 
-  <button id="motivate-button" aria-label="Show next motivational quote">Motivate Me!</button>
-
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
   <script>
     const quotes = [
-      "Believe you can and you’re halfway there. — Theodore Roosevelt",
-      "Success is the sum of small efforts repeated day in and day out. — Robert Collier",
-      "Don’t watch the clock; do what it does. Keep going. — Sam Levenson",
-      "Push yourself, because no one else is going to do it for you.",
-      "Your limitation—it’s only your imagination.",
-      "Great things never come from comfort zones.",
-      "Dream it. Wish it. Do it.",
-      "The harder you work for something, the greater you’ll feel when you achieve it.",
-      "Success doesn’t just find you. You have to go out and get it.",
-      "Don’t stop when you’re tired. Stop when you’re done.",
-      "Little by little, a little becomes a lot. — Tanzanian proverb",
-      "The secret of getting ahead is getting started. — Mark Twain",
-      "Success is not final, failure is not fatal: it is the courage to continue that counts. — Winston Churchill",
-      "If it doesn’t challenge you, it won’t change you.",
-      "Strive for progress, not perfection.",
-      "You don’t have to be great to start, but you have to start to be great. — Zig Ziglar",
-      "The expert in anything was once a beginner. — Helen Hayes",
-      "Don’t let what you cannot do interfere with what you can do. — John Wooden",
-      "Wake up with determination. Go to bed with satisfaction.",
-      "Your future is created by what you do today, not tomorrow. — Robert Kiyosaki",
-      "Failure is the opportunity to begin again more intelligently. — Henry Ford",
-      "Stay positive, work hard, make it happen.",
-      "A little progress each day adds up to big results.",
-      "It always seems impossible until it’s done. — Nelson Mandela",
+      "Believe you can and you're halfway there.",
+      "Success is not final, failure is not fatal: It is the courage to continue that counts.",
+      "Don’t watch the clock; do what it does. Keep going.",
+      "The future depends on what you do today.",
       "You are capable of amazing things.",
-      "Don’t be pushed around by the fears in your mind. Be led by the dreams in your heart. — Roy T. Bennett",
-      "Education is the most powerful weapon which you can use to change the world. — Nelson Mandela",
-      "Success comes to those who hustle wisely.",
-      "The difference between ordinary and extraordinary is that little extra. — Jimmy Johnson",
-      "Focus on your goal. Don’t look in any direction but ahead. — Unknown"
+      "Push yourself, because no one else is going to do it for you.",
+      "Stay positive, work hard, make it happen.",
+      "Your limitation—it’s only your imagination.",
+      "Sometimes later becomes never. Do it now.",
+      "Great things never come from comfort zones.",
     ];
 
-    let currentQuoteIndex = 0;
-    const quoteContainer = document.getElementById('quote-container');
-    const motivateButton = document.getElementById('motivate-button');
-
-    function showQuote(index) {
-      quoteContainer.style.opacity = 0;
-      setTimeout(() => {
-        quoteContainer.textContent = quotes[index];
-        quoteContainer.style.opacity = 1;
-      }, 500);
-    }
-
-    motivateButton.addEventListener('click', () => {
-      currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
-      showQuote(currentQuoteIndex);
-    });
-
-    // Show initial quote
-    showQuote(currentQuoteIndex);
-
-    // Countdown + confetti + quote change every minute
     let previousMinutes = null;
+    let currentQuoteIndex = 0;
+
+    const daysNumber = document.getElementById("days-number");
+    const hoursNumber = document.getElementById("hours-number");
+    const minutesNumber = document.getElementById("minutes-number");
+    const secondsNumber = document.getElementById("seconds-number");
+    const quoteBox = document.getElementById("quote-box");
+    const motivateBtn = document.getElementById("motivate-btn");
 
     function confettiBurst() {
       confetti({
-        particleCount: 40,
+        particleCount: 60,
         spread: 70,
-        origin: { x: 0.5, y: 0.3 },
+        origin: { y: 0.6 }
       });
     }
 
-    function updateCountdown() {
-      const now = new Date();
+    function showQuote(index) {
+      quoteBox.classList.remove("visible");
+      setTimeout(() => {
+        quoteBox.textContent = quotes[index];
+        quoteBox.classList.add("visible");
+      }, 400);
+    }
 
+    function updateCountdown() {
       const target = new Date();
-      target.setDate(target.getDate() + ((5 - target.getDay() + 7) % 7)); // Next Friday
+      // Set your exam end date/time here:
+      target.setFullYear(2025, 5, 20); // June 20, 2025
       target.setHours(15, 30, 0, 0); // 3:30 PM
 
+      const now = new Date();
       const diff = target - now;
 
       if (diff < 0) {
-        document.getElementById("days-number").textContent = 0;
-        document.getElementById("hours-number").textContent = 0;
-        document.getElementById("minutes-number").textContent = 0;
-        document.getElementById("seconds-number").textContent = 0;
+        daysNumber.textContent = 0;
+        hoursNumber.textContent = 0;
+        minutesNumber.textContent = 0;
+        secondsNumber.textContent = 0;
+        quoteBox.textContent = "Time's up! 🎉 You made it!";
         return;
       }
 
@@ -277,10 +234,10 @@
       const minutes = Math.floor((diff / (1000 * 60)) % 60);
       const seconds = Math.floor((diff / 1000) % 60);
 
-      document.getElementById("days-number").textContent = days;
-      document.getElementById("hours-number").textContent = hours;
-      document.getElementById("minutes-number").textContent = minutes;
-      document.getElementById("seconds-number").textContent = seconds;
+      daysNumber.textContent = days;
+      hoursNumber.textContent = hours;
+      minutesNumber.textContent = minutes;
+      secondsNumber.textContent = seconds;
 
       if (minutes !== previousMinutes) {
         confettiBurst();
@@ -291,9 +248,13 @@
       }
     }
 
+    motivateBtn.addEventListener("click", () => {
+      currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
+      showQuote(currentQuoteIndex);
+    });
+
     setInterval(updateCountdown, 1000);
     updateCountdown();
   </script>
-
 </body>
 </html>
