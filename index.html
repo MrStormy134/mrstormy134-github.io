@@ -1,202 +1,299 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Countdown with Glowing Numbers & Confetti 🎉</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Countdown with Neon Glowing Borders & Motivational Quotes 🎉</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
 
-  body {
-    margin: 0;
-    height: 100vh;
-    background-color: #dde7f0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Poppins', sans-serif;
-    color: #222;
-    flex-direction: column;
-    user-select: none;
-    opacity: 0;
-    animation: fadeIn 1.2s forwards;
-  }
-
-  @keyframes fadeIn {
-    to {
-      opacity: 1;
+    body {
+      margin: 0;
+      height: 100vh;
+      background-color: #121212;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Poppins', sans-serif;
+      color: #eee;
+      flex-direction: column;
+      user-select: none;
+      opacity: 0;
+      animation: fadeIn 1.2s forwards;
+      padding: 20px;
     }
-  }
 
-  h1 {
-    margin-bottom: 30px;
-    font-weight: 600;
-    font-size: 2rem;
-    letter-spacing: 2px;
-  }
-
-  .countdown {
-    display: flex;
-    gap: 25px;
-  }
-
-  .time-segment {
-    position: relative;
-    background: #f9fbff;
-    padding: 25px 30px;
-    border-radius: 12px;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-    cursor: default;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    min-width: 70px;
-    user-select: none;
-    overflow: visible;
-  }
-
-  .time-segment:hover,
-  .time-segment:focus {
-    transform: scale(1.2);
-    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
-    outline: none;
-  }
-
-  .number {
-    position: relative;
-    font-size: 3rem;
-    font-weight: 700;
-    color: #003366;
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15);
-    transition: text-shadow 0.3s ease;
-    z-index: 2;
-  }
-
-  .time-segment:hover .number,
-  .time-segment:focus .number {
-    text-shadow: 4px 4px 12px rgba(0, 0, 0, 0.3);
-  }
-
-  /* Glow behind each number */
-  .number::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 110%;
-    height: 110%;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    filter: blur(15px);
-    opacity: 0.7;
-    z-index: 1;
-    animation: pulseGlow 3s ease-in-out infinite;
-  }
-
-  /* Different glow colors for each segment */
-  #days-number::before {
-    background: radial-gradient(circle, #6bc1ff 0%, transparent 70%);
-  }
-  #hours-number::before {
-    background: radial-gradient(circle, #ffa726 0%, transparent 70%);
-  }
-  #minutes-number::before {
-    background: radial-gradient(circle, #66bb6a 0%, transparent 70%);
-  }
-  #seconds-number::before {
-    background: radial-gradient(circle, #ab47bc 0%, transparent 70%);
-  }
-
-  @keyframes pulseGlow {
-    0%,
-    100% {
-      opacity: 0.7;
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
     }
-    50% {
-      opacity: 1;
-    }
-  }
 
-  .label {
-    font-size: 1.1rem;
-    margin-top: 8px;
-    font-weight: 600;
-    color: #004080;
-    text-transform: uppercase;
-  }
-</style>
+    h1 {
+      margin-bottom: 30px;
+      font-weight: 600;
+      font-size: 2rem;
+      letter-spacing: 2px;
+      color: #0ff;
+      text-shadow:
+        0 0 8px #0ff,
+        0 0 20px #0ff;
+    }
+
+    .countdown {
+      display: flex;
+      gap: 25px;
+      margin-bottom: 40px;
+    }
+
+    .time-segment {
+      position: relative;
+      background: #1e1e1e;
+      padding: 25px 30px;
+      border-radius: 12px;
+      box-shadow:
+        0 0 8px rgba(0,0,0,0.7),
+        inset 0 0 10px rgba(0,0,0,0.8);
+      cursor: default;
+      text-align: center;
+      transition: transform 0.3s ease;
+      min-width: 80px;
+      user-select: none;
+      overflow: visible;
+      border: 3px solid transparent;
+      animation: neonBorderCycle 12s linear infinite;
+    }
+
+    .time-segment:hover,
+    .time-segment:focus {
+      transform: scale(1.15);
+      outline: none;
+      box-shadow:
+        0 0 18px #fff,
+        inset 0 0 20px #0ff;
+    }
+
+    .number {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #0ff;
+      text-shadow:
+        0 0 8px #0ff,
+        0 0 20px #0ff;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .label {
+      font-size: 1.1rem;
+      margin-top: 8px;
+      font-weight: 600;
+      color: #66ffff;
+      text-transform: uppercase;
+      user-select: none;
+      pointer-events: none;
+      text-shadow: 0 0 6px #0ff;
+    }
+
+    @keyframes neonBorderCycle {
+      0% {
+        border-color: #0ff;
+        box-shadow: 0 0 8px #0ff, inset 0 0 10px #0ff;
+      }
+      25% {
+        border-color: #ff00ff;
+        box-shadow: 0 0 8px #ff00ff, inset 0 0 10px #ff00ff;
+      }
+      50% {
+        border-color: #00ffea;
+        box-shadow: 0 0 8px #00ffea, inset 0 0 10px #00ffea;
+      }
+      75% {
+        border-color: #ff1493;
+        box-shadow: 0 0 8px #ff1493, inset 0 0 10px #ff1493;
+      }
+      100% {
+        border-color: #0ff;
+        box-shadow: 0 0 8px #0ff, inset 0 0 10px #0ff;
+      }
+    }
+
+    #quote-container {
+      max-width: 600px;
+      font-size: 1.3rem;
+      font-style: italic;
+      text-align: center;
+      color: #a0f0ff;
+      margin-bottom: 25px;
+      min-height: 60px;
+      user-select: none;
+      text-shadow:
+        0 0 6px #66ffff;
+      transition: opacity 0.6s ease;
+    }
+
+    #motivate-button {
+      background: linear-gradient(45deg, #00ffff, #ff00ff);
+      border: none;
+      border-radius: 30px;
+      padding: 12px 32px;
+      font-size: 1.1rem;
+      color: white;
+      cursor: pointer;
+      box-shadow:
+        0 0 12px #00ffff,
+        0 0 24px #ff00ff;
+      transition: box-shadow 0.3s ease, transform 0.2s ease;
+      user-select: none;
+    }
+
+    #motivate-button:hover {
+      box-shadow:
+        0 0 20px #00ffff,
+        0 0 40px #ff00ff;
+      transform: scale(1.1);
+    }
+
+    #motivate-button:focus {
+      outline: none;
+      box-shadow:
+        0 0 24px #00ffff,
+        0 0 48px #ff00ff;
+    }
+  </style>
 </head>
 <body>
 
-<h1>Countdown to End of Exams 🎉</h1>
-<div class="countdown" aria-label="Countdown timer">
-  <div class="time-segment" tabindex="0" role="timer" aria-live="polite" id="days">
-    <div class="number" id="days-number">0</div>
-    <div class="label">Days</div>
+  <h1>Countdown to End of Exams 🎉</h1>
+  <div class="countdown" aria-label="Countdown timer">
+    <div class="time-segment" tabindex="0" role="timer" aria-live="polite" id="days">
+      <div class="number" id="days-number">0</div>
+      <div class="label">Days</div>
+    </div>
+    <div class="time-segment" tabindex="0" role="timer" aria-live="polite" id="hours">
+      <div class="number" id="hours-number">0</div>
+      <div class="label">Hours</div>
+    </div>
+    <div class="time-segment" tabindex="0" role="timer" aria-live="polite" id="minutes">
+      <div class="number" id="minutes-number">0</div>
+      <div class="label">Minutes</div>
+    </div>
+    <div class="time-segment" tabindex="0" role="timer" aria-live="polite" id="seconds">
+      <div class="number" id="seconds-number">0</div>
+      <div class="label">Seconds</div>
+    </div>
   </div>
-  <div class="time-segment" tabindex="0" role="timer" aria-live="polite" id="hours">
-    <div class="number" id="hours-number">0</div>
-    <div class="label">Hours</div>
-  </div>
-  <div class="time-segment" tabindex="0" role="timer" aria-live="polite" id="minutes">
-    <div class="number" id="minutes-number">0</div>
-    <div class="label">Minutes</div>
-  </div>
-  <div class="time-segment" tabindex="0" role="timer" aria-live="polite" id="seconds">
-    <div class="number" id="seconds-number">0</div>
-    <div class="label">Seconds</div>
-  </div>
-</div>
 
-<!-- Canvas Confetti Library -->
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <div id="quote-container" aria-live="polite" aria-atomic="true"></div>
 
-<script>
-  let previousMinutes = null;
+  <button id="motivate-button" aria-label="Show next motivational quote">Motivate Me!</button>
 
-  function confettiBurst() {
-    confetti({
-      particleCount: 40,
-      spread: 70,
-      origin: { x: 0.5, y: 0.3 },
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <script>
+    const quotes = [
+      "Believe you can and you’re halfway there. — Theodore Roosevelt",
+      "Success is the sum of small efforts repeated day in and day out. — Robert Collier",
+      "Don’t watch the clock; do what it does. Keep going. — Sam Levenson",
+      "Push yourself, because no one else is going to do it for you.",
+      "Your limitation—it’s only your imagination.",
+      "Great things never come from comfort zones.",
+      "Dream it. Wish it. Do it.",
+      "The harder you work for something, the greater you’ll feel when you achieve it.",
+      "Success doesn’t just find you. You have to go out and get it.",
+      "Don’t stop when you’re tired. Stop when you’re done.",
+      "Little by little, a little becomes a lot. — Tanzanian proverb",
+      "The secret of getting ahead is getting started. — Mark Twain",
+      "Success is not final, failure is not fatal: it is the courage to continue that counts. — Winston Churchill",
+      "If it doesn’t challenge you, it won’t change you.",
+      "Strive for progress, not perfection.",
+      "You don’t have to be great to start, but you have to start to be great. — Zig Ziglar",
+      "The expert in anything was once a beginner. — Helen Hayes",
+      "Don’t let what you cannot do interfere with what you can do. — John Wooden",
+      "Wake up with determination. Go to bed with satisfaction.",
+      "Your future is created by what you do today, not tomorrow. — Robert Kiyosaki",
+      "Failure is the opportunity to begin again more intelligently. — Henry Ford",
+      "Stay positive, work hard, make it happen.",
+      "A little progress each day adds up to big results.",
+      "It always seems impossible until it’s done. — Nelson Mandela",
+      "You are capable of amazing things.",
+      "Don’t be pushed around by the fears in your mind. Be led by the dreams in your heart. — Roy T. Bennett",
+      "Education is the most powerful weapon which you can use to change the world. — Nelson Mandela",
+      "Success comes to those who hustle wisely.",
+      "The difference between ordinary and extraordinary is that little extra. — Jimmy Johnson",
+      "Focus on your goal. Don’t look in any direction but ahead. — Unknown"
+    ];
+
+    let currentQuoteIndex = 0;
+    const quoteContainer = document.getElementById('quote-container');
+    const motivateButton = document.getElementById('motivate-button');
+
+    function showQuote(index) {
+      quoteContainer.style.opacity = 0;
+      setTimeout(() => {
+        quoteContainer.textContent = quotes[index];
+        quoteContainer.style.opacity = 1;
+      }, 500);
+    }
+
+    motivateButton.addEventListener('click', () => {
+      currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
+      showQuote(currentQuoteIndex);
     });
-  }
 
-  function updateCountdown() {
-    const now = new Date();
+    // Show initial quote
+    showQuote(currentQuoteIndex);
 
-    const target = new Date();
-    target.setDate(target.getDate() + ((5 - target.getDay() + 7) % 7)); // Next Friday
-    target.setHours(15, 30, 0, 0); // 3:30 PM
+    // Countdown + confetti + quote change every minute
+    let previousMinutes = null;
 
-    const diff = target - now;
-
-    if (diff < 0) {
-      document.getElementById("days-number").textContent = 0;
-      document.getElementById("hours-number").textContent = 0;
-      document.getElementById("minutes-number").textContent = 0;
-      document.getElementById("seconds-number").textContent = 0;
-      return;
+    function confettiBurst() {
+      confetti({
+        particleCount: 40,
+        spread: 70,
+        origin: { x: 0.5, y: 0.3 },
+      });
     }
 
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((diff / (1000 * 60)) % 60);
-    const seconds = Math.floor((diff / 1000) % 60);
+    function updateCountdown() {
+      const now = new Date();
 
-    document.getElementById("days-number").textContent = days;
-    document.getElementById("hours-number").textContent = hours;
-    document.getElementById("minutes-number").textContent = minutes;
-    document.getElementById("seconds-number").textContent = seconds;
+      const target = new Date();
+      target.setDate(target.getDate() + ((5 - target.getDay() + 7) % 7)); // Next Friday
+      target.setHours(15, 30, 0, 0); // 3:30 PM
 
-    if (previousMinutes !== null && minutes < previousMinutes) {
-      confettiBurst();
+      const diff = target - now;
+
+      if (diff < 0) {
+        document.getElementById("days-number").textContent = 0;
+        document.getElementById("hours-number").textContent = 0;
+        document.getElementById("minutes-number").textContent = 0;
+        document.getElementById("seconds-number").textContent = 0;
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById("days-number").textContent = days;
+      document.getElementById("hours-number").textContent = hours;
+      document.getElementById("minutes-number").textContent = minutes;
+      document.getElementById("seconds-number").textContent = seconds;
+
+      if (minutes !== previousMinutes) {
+        confettiBurst();
+        previousMinutes = minutes;
+
+        currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
+        showQuote(currentQuoteIndex);
+      }
     }
-    previousMinutes = minutes;
-  }
 
-  setInterval(updateCountdown, 1000);
-  updateCountdown();
-</script>
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
 
 </body>
 </html>
