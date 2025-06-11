@@ -8,7 +8,7 @@
 
   html, body {
     margin: 0; padding: 0; height: 100%;
-    background: #a8d0ff; /* Soft light blue */
+    background: #a8d0ff;
     font-family: 'Poppins', sans-serif;
     color: #222;
     display: flex;
@@ -18,7 +18,6 @@
     animation: fadeIn 1.5s ease forwards;
   }
 
-  /* Fade in page */
   @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -33,14 +32,17 @@
     text-shadow: 0 0 6px #66a3ff88;
   }
 
-  /* Countdown container */
+  #confetti-emoji {
+    cursor: pointer;
+    user-select: none;
+  }
+
   #countdown {
     display: flex;
     gap: 25px;
     z-index: 10;
   }
 
-  /* Each time box */
   .time-box {
     position: relative;
     background: #e3f0ff;
@@ -55,17 +57,18 @@
     user-select: none;
     cursor: default;
 
-    /* Space for border glow */
     border: 4px solid transparent;
     background-clip: padding-box;
     z-index: 10;
   }
 
-  /* Neon multi-color animated border */
   .time-box::before {
     content: '';
     position: absolute;
-    top: -4px; left: -4px; right: -4px; bottom: -4px;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
     border-radius: 19px;
     background: conic-gradient(
       from 0deg,
@@ -77,34 +80,30 @@
     );
     z-index: -1;
 
-    /* Show only on border */
     -webkit-mask:
       linear-gradient(#fff 0 0) content-box,
       linear-gradient(#fff 0 0);
     -webkit-mask-composite: destination-out;
     mask-composite: exclude;
 
-    /* Animate color shift around border */
     animation: borderColorShift 6s linear infinite;
   }
 
   @keyframes borderColorShift {
-    0% {
-      background: conic-gradient(from 0deg, #ff6ec4, #42d4f4, #6effa6, #ff6ec4, #42d4f4);
+    from {
+      transform: rotate(0deg);
     }
-    100% {
-      background: conic-gradient(from 360deg, #ff6ec4, #42d4f4, #6effa6, #ff6ec4, #42d4f4);
+    to {
+      transform: rotate(360deg);
     }
   }
 
-  /* Hover enlarge with smooth scale */
   .time-box:hover {
     transform: scale(1.25);
     box-shadow: 0 0 20px #42d4f4, 0 0 35px #6effa6;
     z-index: 20;
   }
 
-  /* Label below each number */
   .label {
     font-size: 1rem;
     font-weight: 500;
@@ -113,7 +112,6 @@
     user-select: none;
   }
 
-  /* Motivational quote box */
   #quote-box {
     margin-top: 40px;
     max-width: 600px;
@@ -132,7 +130,6 @@
     opacity: 1;
   }
 
-  /* Motivate Me button */
   #motivate-btn {
     margin-top: 25px;
     padding: 10px 30px;
@@ -155,7 +152,10 @@
 </head>
 <body>
 
-<h1>Countdown to End of Exams 🎉</h1>
+<h1>
+  Countdown to End of Exams 
+  <span id="confetti-emoji" title="Hover me!">🎉</span>
+</h1>
 
 <div id="countdown">
   <div class="time-box">
@@ -203,6 +203,7 @@
   const secondsNumber = document.getElementById("seconds-number");
   const quoteBox = document.getElementById("quote-box");
   const motivateBtn = document.getElementById("motivate-btn");
+  const confettiEmoji = document.getElementById('confetti-emoji');
 
   function confettiBurst() {
     confetti({
@@ -222,7 +223,6 @@
 
   function updateCountdown() {
     const target = new Date();
-    // Set your exam end date/time here:
     target.setFullYear(2025, 5, 20); // June 20, 2025
     target.setHours(15, 30, 0, 0); // 3:30 PM
 
@@ -260,6 +260,14 @@
   motivateBtn.addEventListener("click", () => {
     currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
     showQuote(currentQuoteIndex);
+  });
+
+  confettiEmoji.addEventListener('mouseenter', () => {
+    confetti({
+      particleCount: 100,
+      spread: 100,
+      origin: { y: 0.6 }
+    });
   });
 
   setInterval(updateCountdown, 1000);
