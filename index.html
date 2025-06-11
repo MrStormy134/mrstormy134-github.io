@@ -265,10 +265,25 @@
     }, 400);
   }
 
+  function getNextFridayAt1530() {
+    const now = new Date();
+    const target = new Date(now);
+
+    const dayOfWeek = now.getDay(); // 0=Sun,1=Mon,...5=Fri,6=Sat
+
+    let daysUntilFriday = (5 - dayOfWeek + 7) % 7;
+    if (daysUntilFriday === 0 && (now.getHours() > 15 || (now.getHours() === 15 && now.getMinutes() >= 30))) {
+      daysUntilFriday = 7; // If past 3:30pm Friday, go to next Friday
+    }
+
+    target.setDate(now.getDate() + daysUntilFriday);
+    target.setHours(15, 30, 0, 0);
+
+    return target;
+  }
+
   function updateCountdown() {
-    const target = new Date();
-    target.setFullYear(2025, 5, 20); // June 20, 2025
-    target.setHours(15, 30, 0, 0); // 3:30 PM
+    const target = getNextFridayAt1530();
 
     const now = new Date();
     const diff = target - now;
