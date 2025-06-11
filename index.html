@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Countdown with Confetti on Minute 🎉</title>
+<title>Countdown with Glowing Numbers & Confetti 🎉</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
 
@@ -18,8 +18,8 @@
     color: #222;
     flex-direction: column;
     user-select: none;
-    opacity: 0;               /* Start transparent */
-    animation: fadeIn 1.2s forwards; /* Fade in on load */
+    opacity: 0;
+    animation: fadeIn 1.2s forwards;
   }
 
   @keyframes fadeIn {
@@ -41,6 +41,7 @@
   }
 
   .time-segment {
+    position: relative;
     background: #f9fbff;
     padding: 25px 30px;
     border-radius: 12px;
@@ -50,25 +51,69 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     min-width: 70px;
     user-select: none;
+    overflow: visible;
   }
 
-  .time-segment:hover, .time-segment:focus {
+  .time-segment:hover,
+  .time-segment:focus {
     transform: scale(1.2);
     box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
     outline: none;
   }
 
   .number {
+    position: relative;
     font-size: 3rem;
     font-weight: 700;
     color: #003366;
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15); /* subtle shadow */
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15);
     transition: text-shadow 0.3s ease;
+    z-index: 2;
   }
 
   .time-segment:hover .number,
   .time-segment:focus .number {
-    text-shadow: 4px 4px 12px rgba(0, 0, 0, 0.3); /* stronger shadow on hover */
+    text-shadow: 4px 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Glow behind each number */
+  .number::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 110%;
+    height: 110%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    filter: blur(15px);
+    opacity: 0.7;
+    z-index: 1;
+    animation: pulseGlow 3s ease-in-out infinite;
+  }
+
+  /* Different glow colors for each segment */
+  #days-number::before {
+    background: radial-gradient(circle, #6bc1ff 0%, transparent 70%);
+  }
+  #hours-number::before {
+    background: radial-gradient(circle, #ffa726 0%, transparent 70%);
+  }
+  #minutes-number::before {
+    background: radial-gradient(circle, #66bb6a 0%, transparent 70%);
+  }
+  #seconds-number::before {
+    background: radial-gradient(circle, #ab47bc 0%, transparent 70%);
+  }
+
+  @keyframes pulseGlow {
+    0%,
+    100% {
+      opacity: 0.7;
+    }
+    50% {
+      opacity: 1;
+    }
   }
 
   .label {
@@ -84,25 +129,25 @@
 
 <h1>Countdown to End of Exams 🎉</h1>
 <div class="countdown" aria-label="Countdown timer">
-  <div class="time-segment" tabindex="0" role="timer" aria-live="polite">
-    <div class="number" id="days">0</div>
+  <div class="time-segment" tabindex="0" role="timer" aria-live="polite" id="days">
+    <div class="number" id="days-number">0</div>
     <div class="label">Days</div>
   </div>
-  <div class="time-segment" tabindex="0" role="timer" aria-live="polite">
-    <div class="number" id="hours">0</div>
+  <div class="time-segment" tabindex="0" role="timer" aria-live="polite" id="hours">
+    <div class="number" id="hours-number">0</div>
     <div class="label">Hours</div>
   </div>
-  <div class="time-segment" tabindex="0" role="timer" aria-live="polite">
-    <div class="number" id="minutes">0</div>
+  <div class="time-segment" tabindex="0" role="timer" aria-live="polite" id="minutes">
+    <div class="number" id="minutes-number">0</div>
     <div class="label">Minutes</div>
   </div>
-  <div class="time-segment" tabindex="0" role="timer" aria-live="polite">
-    <div class="number" id="seconds">0</div>
+  <div class="time-segment" tabindex="0" role="timer" aria-live="polite" id="seconds">
+    <div class="number" id="seconds-number">0</div>
     <div class="label">Seconds</div>
   </div>
 </div>
 
-<!-- Include canvas-confetti library -->
+<!-- Canvas Confetti Library -->
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <script>
@@ -126,10 +171,10 @@
     const diff = target - now;
 
     if (diff < 0) {
-      document.getElementById("days").textContent = 0;
-      document.getElementById("hours").textContent = 0;
-      document.getElementById("minutes").textContent = 0;
-      document.getElementById("seconds").textContent = 0;
+      document.getElementById("days-number").textContent = 0;
+      document.getElementById("hours-number").textContent = 0;
+      document.getElementById("minutes-number").textContent = 0;
+      document.getElementById("seconds-number").textContent = 0;
       return;
     }
 
@@ -138,12 +183,11 @@
     const minutes = Math.floor((diff / (1000 * 60)) % 60);
     const seconds = Math.floor((diff / 1000) % 60);
 
-    document.getElementById("days").textContent = days;
-    document.getElementById("hours").textContent = hours;
-    document.getElementById("minutes").textContent = minutes;
-    document.getElementById("seconds").textContent = seconds;
+    document.getElementById("days-number").textContent = days;
+    document.getElementById("hours-number").textContent = hours;
+    document.getElementById("minutes-number").textContent = minutes;
+    document.getElementById("seconds-number").textContent = seconds;
 
-    // Trigger confetti only when minute decreases
     if (previousMinutes !== null && minutes < previousMinutes) {
       confettiBurst();
     }
