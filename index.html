@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Interactive Countdown with Confetti 🎉</title>
+<title>Countdown with Confetti on Minute 🎉</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
 
@@ -18,6 +18,14 @@
     color: #222;
     flex-direction: column;
     user-select: none;
+    opacity: 0;               /* Start transparent */
+    animation: fadeIn 1.2s forwards; /* Fade in on load */
+  }
+
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
   }
 
   h1 {
@@ -37,7 +45,7 @@
     padding: 25px 30px;
     border-radius: 12px;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
+    cursor: default;
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     min-width: 70px;
@@ -54,6 +62,13 @@
     font-size: 3rem;
     font-weight: 700;
     color: #003366;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15); /* subtle shadow */
+    transition: text-shadow 0.3s ease;
+  }
+
+  .time-segment:hover .number,
+  .time-segment:focus .number {
+    text-shadow: 4px 4px 12px rgba(0, 0, 0, 0.3); /* stronger shadow on hover */
   }
 
   .label {
@@ -91,6 +106,16 @@
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <script>
+  let previousMinutes = null;
+
+  function confettiBurst() {
+    confetti({
+      particleCount: 40,
+      spread: 70,
+      origin: { x: 0.5, y: 0.3 },
+    });
+  }
+
   function updateCountdown() {
     const now = new Date();
 
@@ -117,28 +142,13 @@
     document.getElementById("hours").textContent = hours;
     document.getElementById("minutes").textContent = minutes;
     document.getElementById("seconds").textContent = seconds;
+
+    // Trigger confetti only when minute decreases
+    if (previousMinutes !== null && minutes < previousMinutes) {
+      confettiBurst();
+    }
+    previousMinutes = minutes;
   }
-
-  // Confetti burst function
-  function confettiBurst(element) {
-    const rect = element.getBoundingClientRect();
-    const x = rect.left + rect.width / 2;
-    const y = rect.top + rect.height / 2;
-
-    confetti({
-      particleCount: 30,
-      spread: 70,
-      origin: {
-        x: x / window.innerWidth,
-        y: y / window.innerHeight
-      }
-    });
-  }
-
-  document.querySelectorAll('.time-segment').forEach(segment => {
-    segment.addEventListener('mouseenter', () => confettiBurst(segment));
-    segment.addEventListener('focus', () => confettiBurst(segment));
-  });
 
   setInterval(updateCountdown, 1000);
   updateCountdown();
