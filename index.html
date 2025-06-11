@@ -16,6 +16,8 @@
     align-items: center;
     justify-content: center;
     animation: fadeIn 1.5s ease forwards;
+    min-height: 100vh;
+    box-sizing: border-box;
   }
 
   @keyframes fadeIn {
@@ -73,7 +75,6 @@
     bottom: -4px;
     border-radius: 19px;
 
-    /* The conic-gradient ring */
     background: conic-gradient(
       from 0deg,
       #ff6ec4,
@@ -85,14 +86,12 @@
 
     z-index: -1;
 
-    /* Mask to show only the border ring */
     -webkit-mask:
       linear-gradient(#fff 0 0) content-box,
       linear-gradient(#fff 0 0);
     -webkit-mask-composite: destination-out;
     mask-composite: exclude;
 
-    /* Animate the rotation */
     animation: borderColorShift 6s linear infinite;
     transform-origin: center center;
   }
@@ -132,6 +131,7 @@
     transition: opacity 1s ease;
     user-select: none;
     z-index: 10;
+    padding: 0 15px;
   }
 
   #quote-box.visible {
@@ -155,6 +155,42 @@
   }
   #motivate-btn:hover {
     background: linear-gradient(45deg, #3399cc, #33cc99);
+  }
+
+  /* Responsive for phones */
+  @media (max-width: 600px) {
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 30px;
+      padding: 0 10px;
+    }
+    #countdown {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      width: 90vw;
+    }
+    .time-box {
+      min-width: 40vw;
+      font-size: 3rem;
+      padding: 25px 0;
+      border-radius: 20px;
+    }
+    .label {
+      font-size: 1.1rem;
+    }
+    #quote-box {
+      font-size: 1.1rem;
+      max-width: 90vw;
+      min-height: auto;
+    }
+    #motivate-btn {
+      width: 90vw;
+      font-size: 1.2rem;
+      padding: 12px 0;
+      margin-top: 20px;
+      border-radius: 30px;
+    }
   }
 </style>
 </head>
@@ -257,7 +293,6 @@
     secondsNumber.textContent = seconds;
 
     if (minutes !== previousMinutes) {
-      // Get emoji position on screen as normalized viewport coords [0-1]
       const rect = confettiEmoji.getBoundingClientRect();
       const x = (rect.left + rect.width / 2) / window.innerWidth;
       const y = (rect.top + rect.height / 2) / window.innerHeight;
