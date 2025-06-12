@@ -48,7 +48,6 @@
   }
 
   .time-box {
-    position: relative;
     background: #e3f0ff;
     padding: 20px 35px;
     border-radius: 15px;
@@ -61,60 +60,12 @@
     user-select: none;
     cursor: default;
 
-    /* We keep a base border */
-    border: 3px solid transparent;
-    background-clip: padding-box;
-    z-index: 10;
-
     transition: transform 0.3s ease;
-  }
-
-  /* Neon rainbow border chase effect on hover */
-
-  .time-box::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 15px;
-    padding: 3px;
-    background: linear-gradient(270deg, 
-      #ff3b3f, 
-      #ff9a3f, 
-      #f6ff3f, 
-      #3fff59, 
-      #3fffff, 
-      #3f6aff, 
-      #a63fff, 
-      #ff3b3f
-    );
-    -webkit-mask:
-      linear-gradient(#fff 0 0) content-box, 
-      linear-gradient(#fff 0 0);
-    -webkit-mask-composite: destination-out;
-    mask-composite: exclude;
-
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.4s ease;
-    animation: neon-chase 3.5s linear infinite;
-    z-index: -1;
   }
 
   .time-box:hover {
     transform: scale(1.25);
     z-index: 20;
-  }
-  .time-box:hover::before {
-    opacity: 1;
-  }
-
-  @keyframes neon-chase {
-    0% {
-      background-position: 0% 50%;
-    }
-    100% {
-      background-position: 400% 50%;
-    }
   }
 
   .label {
