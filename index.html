@@ -61,96 +61,60 @@
     user-select: none;
     cursor: default;
 
-    border: 4px solid transparent;
+    /* We keep a base border */
+    border: 3px solid transparent;
     background-clip: padding-box;
     z-index: 10;
 
     transition: transform 0.3s ease;
   }
 
+  /* Neon rainbow border chase effect on hover */
+
   .time-box::before {
-    content: '';
+    content: "";
     position: absolute;
-    top: -4px;
-    left: -4px;
-    right: -4px;
-    bottom: -4px;
-    border-radius: 19px;
-
-    background: conic-gradient(
-      from 0deg,
-      #ff6ec4,
-      #42d4f4,
-      #6effa6,
-      #ff6ec4,
-      #42d4f4
+    inset: 0;
+    border-radius: 15px;
+    padding: 3px;
+    background: linear-gradient(270deg, 
+      #ff3b3f, 
+      #ff9a3f, 
+      #f6ff3f, 
+      #3fff59, 
+      #3fffff, 
+      #3f6aff, 
+      #a63fff, 
+      #ff3b3f
     );
-
-    z-index: -1;
-
     -webkit-mask:
-      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0) content-box, 
       linear-gradient(#fff 0 0);
     -webkit-mask-composite: destination-out;
     mask-composite: exclude;
 
-    animation: borderColorShift 6s linear infinite;
-    transform-origin: center center;
-  }
-
-  /* Rainbow chasing glow ring */
-  .time-box::after {
-    content: '';
-    position: absolute;
-    top: -8px;
-    left: -8px;
-    right: -8px;
-    bottom: -8px;
-    border-radius: 23px;
-    background: conic-gradient(
-      from 0deg,
-      #ff0000,
-      #ff7f00,
-      #ffff00,
-      #00ff00,
-      #0000ff,
-      #4b0082,
-      #8f00ff,
-      #ff0000
-    );
     opacity: 0;
     pointer-events: none;
+    transition: opacity 0.4s ease;
+    animation: neon-chase 3.5s linear infinite;
     z-index: -1;
-    filter: blur(8px);
-    transition: opacity 0.3s ease;
-    animation: rainbowSpin 3s linear infinite;
-  }
-
-  @keyframes rainbowSpin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-
-  @keyframes borderColorShift {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
   }
 
   .time-box:hover {
     transform: scale(1.25);
     z-index: 20;
   }
-
-  .time-box:hover::after {
+  .time-box:hover::before {
     opacity: 1;
+  }
+
+  @keyframes neon-chase {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 400% 50%;
+    }
   }
 
   .label {
