@@ -65,7 +65,6 @@
     background-clip: padding-box;
     z-index: 10;
 
-    /* Added transition for smooth scaling */
     transition: transform 0.3s ease;
   }
 
@@ -99,6 +98,43 @@
     transform-origin: center center;
   }
 
+  /* Rainbow chasing glow ring */
+  .time-box::after {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    right: -8px;
+    bottom: -8px;
+    border-radius: 23px;
+    background: conic-gradient(
+      from 0deg,
+      #ff0000,
+      #ff7f00,
+      #ffff00,
+      #00ff00,
+      #0000ff,
+      #4b0082,
+      #8f00ff,
+      #ff0000
+    );
+    opacity: 0;
+    pointer-events: none;
+    z-index: -1;
+    filter: blur(8px);
+    transition: opacity 0.3s ease;
+    animation: rainbowSpin 3s linear infinite;
+  }
+
+  @keyframes rainbowSpin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
   @keyframes borderColorShift {
     from {
       transform: rotate(0deg);
@@ -110,8 +146,11 @@
 
   .time-box:hover {
     transform: scale(1.25);
-    box-shadow: 0 0 20px #42d4f4, 0 0 35px #6effa6;
     z-index: 20;
+  }
+
+  .time-box:hover::after {
+    opacity: 1;
   }
 
   .label {
