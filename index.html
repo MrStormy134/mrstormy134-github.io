@@ -15,9 +15,8 @@
       font-family: 'Segoe UI', sans-serif;
     }
 
-    /* Background image with overlay */
     .landing {
-      background: url('https://images.unsplash.com/photo-1600181951741-3c2c427d8243') no-repeat center center/cover;
+      background: url('https://images.unsplash.com/photo-1622442250720-09d6e38c2c53?auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
       height: 100vh;
       display: flex;
       justify-content: center;
@@ -33,31 +32,6 @@
       z-index: 1;
     }
 
-    .menu {
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .menu a {
-      text-decoration: none;
-      color: white;
-      font-size: 2rem;
-      padding: 10px 20px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 8px;
-      transition: all 0.3s ease;
-      text-align: center;
-      width: 200px;
-    }
-
-    .menu a:hover {
-      background: white;
-      color: black;
-      transform: scale(1.1);
-    }
-
     .logo {
       position: absolute;
       top: 30px;
@@ -68,6 +42,35 @@
       font-weight: bold;
       text-transform: uppercase;
       letter-spacing: 2px;
+    }
+
+    .menu {
+      z-index: 2;
+      display: flex;
+      flex-direction: row; /* horizontal layout */
+      gap: 30px;
+    }
+
+    .menu a {
+      text-decoration: none;
+      color: white;
+      font-size: 1.5rem;
+      padding: 15px 25px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .menu a:hover {
+      background: white;
+      color: black;
+      transform: scale(1.1);
+    }
+
+    @media (max-width: 768px) {
+      .menu {
+        flex-direction: column;
+      }
     }
   </style>
 </head>
