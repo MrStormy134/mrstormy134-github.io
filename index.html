@@ -1,344 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<title>Countdown to End of Exams 🎉</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
-
-  html, body {
-    margin: 0; padding: 0; height: 100%;
-    background: #a8d0ff;
-    font-family: 'Poppins', sans-serif;
-    color: #222;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    animation: fadeIn 1.5s ease forwards;
-    min-height: 100vh;
-    box-sizing: border-box;
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  h1 {
-    margin-bottom: 40px;
-    font-size: 2.5rem;
-    z-index: 10;
-    text-align: center;
-    color: #004080;
-    text-shadow: 0 0 6px #66a3ff88;
-  }
-
-  #confetti-emoji {
-    cursor: pointer;
-    user-select: none;
-    display: inline-block;
-    position: relative;
-  }
-
-  #countdown {
-    display: flex;
-    gap: 25px;
-    z-index: 10;
-  }
-
-  .time-box {
-    position: relative;
-    background: #e3f0ff;
-    padding: 20px 35px;
-    border-radius: 15px;
-    color: #004080;
-    min-width: 90px;
-    font-weight: 600;
-    font-size: 2.5rem;
-    text-align: center;
-    box-shadow: 0 0 12px #90caff88;
-    user-select: none;
-    cursor: default;
-
-    border: 4px solid transparent;
-    background-clip: padding-box;
-    z-index: 10;
-  }
-
-  .time-box::before {
-    content: '';
-    position: absolute;
-    top: -4px;
-    left: -4px;
-    right: -4px;
-    bottom: -4px;
-    border-radius: 19px;
-
-    background: conic-gradient(
-      from 0deg,
-      #ff6ec4,
-      #42d4f4,
-      #6effa6,
-      #ff6ec4,
-      #42d4f4
-    );
-
-    z-index: -1;
-
-    -webkit-mask:
-      linear-gradient(#fff 0 0) content-box,
-      linear-gradient(#fff 0 0);
-    -webkit-mask-composite: destination-out;
-    mask-composite: exclude;
-
-    animation: borderColorShift 6s linear infinite;
-    transform-origin: center center;
-  }
-
-  @keyframes borderColorShift {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-
-  .time-box:hover {
-    transform: scale(1.25);
-    box-shadow: 0 0 20px #42d4f4, 0 0 35px #6effa6;
-    z-index: 20;
-  }
-
-  .label {
-    font-size: 1rem;
-    font-weight: 500;
-    margin-top: 5px;
-    color: #004080aa;
-    user-select: none;
-  }
-
-  #quote-box {
-    margin-top: 40px;
-    max-width: 600px;
-    font-size: 1.3rem;
-    font-style: italic;
-    text-align: center;
-    color: #0066cc;
-    min-height: 70px;
-    opacity: 0;
-    transition: opacity 1s ease;
-    user-select: none;
-    z-index: 10;
-    padding: 0 15px;
-  }
-
-  #quote-box.visible {
-    opacity: 1;
-  }
-
-  #motivate-btn {
-    margin-top: 25px;
-    padding: 10px 30px;
-    background: linear-gradient(45deg, #42d4f4, #6effa6);
-    border: none;
-    border-radius: 25px;
-    color: #004080;
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 0 15px #42d4f4aa, 0 0 25px #6effa6aa;
-    transition: background 0.3s ease;
-    user-select: none;
-    z-index: 10;
-  }
-  #motivate-btn:hover {
-    background: linear-gradient(45deg, #3399cc, #33cc99);
-  }
-
-  /* Responsive for phones */
-  @media (max-width: 600px) {
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 30px;
-      padding: 0 10px;
-    }
-    #countdown {
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-      width: 90vw;
-    }
-    .time-box {
-      min-width: 40vw;
-      font-size: 3rem;
-      padding: 25px 0;
-      border-radius: 20px;
-    }
-    .label {
-      font-size: 1.1rem;
-    }
-    #quote-box {
-      font-size: 1.1rem;
-      max-width: 90vw;
-      min-height: auto;
-    }
-    #motivate-btn {
-      width: 90vw;
-      font-size: 1.2rem;
-      padding: 12px 0;
-      margin-top: 20px;
-      border-radius: 30px;
-    }
-  }
-</style>
+  <meta charset="UTF-8" />
+  <title>suPER Shoes Hub</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 0; }
+    header { background: #222; color: white; padding: 20px; text-align: center; }
+    nav a { margin: 0 15px; color: white; text-decoration: none; }
+    section { padding: 20px; display: none; }
+    form input, form textarea { display: block; margin: 10px 0; padding: 8px; width: 100%; max-width: 500px; }
+    form button { padding: 10px 20px; background: #222; color: white; border: none; cursor: pointer; }
+    #home, #browse, #review, #order, #login, #admin { display: none; }
+    .visible { display: block; }
+  </style>
 </head>
 <body>
 
-<h1>
-  Countdown to End of Exams 
-  <span id="confetti-emoji" title="Hover me!">🎉</span>
-</h1>
+<header>
+  <h1>Welcome to suPER Shoes</h1>
+  <nav>
+    <a href="#" onclick="showPage('home')">Home</a>
+    <a href="#" onclick="showPage('browse')">Browse</a>
+    <a href="#" onclick="showPage('review')">Review</a>
+    <a href="#" onclick="showPage('order')">Order</a>
+    <a href="#" onclick="showPage('login')">Admin Login</a>
+  </nav>
+</header>
 
-<div id="countdown">
-  <div class="time-box">
-    <div id="days-number">0</div>
-    <div class="label">Days</div>
-  </div>
-  <div class="time-box">
-    <div id="hours-number">0</div>
-    <div class="label">Hours</div>
-  </div>
-  <div class="time-box">
-    <div id="minutes-number">0</div>
-    <div class="label">Minutes</div>
-  </div>
-  <div class="time-box">
-    <div id="seconds-number">0</div>
-    <div class="label">Seconds</div>
-  </div>
-</div>
+<!-- Home Page -->
+<section id="home" class="visible">
+  <h2>suPER Shoes – Where Style Meets Performance</h2>
+  <p>Browse our collection, leave reviews, or order your own custom pair!</p>
+</section>
 
-<div id="quote-box"></div>
-<button id="motivate-btn">Motivate Me!</button>
+<!-- Browse Page -->
+<section id="browse">
+  <h2>Browse Our Collection</h2>
+  <ul>
+    <li>Air SuPER 1 - $120</li>
+    <li>UltraRun Pro - $150</li>
+    <li>CityFlex X - $100</li>
+  </ul>
+</section>
 
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+<!-- Review Page -->
+<section id="review">
+  <h2>Leave a Review</h2>
+  <form action="https://formspree.io/f/YOUR_ID_HERE" method="POST">
+    <input type="text" name="name" placeholder="Your name" required />
+    <textarea name="review" placeholder="Write your review..." required></textarea>
+    <button type="submit">Submit Review</button>
+  </form>
+</section>
+
+<!-- Order Page -->
+<section id="order">
+  <h2>Order Custom Shoes</h2>
+  <form onsubmit="saveOrder(event)">
+    <input type="text" id="orderName" placeholder="Your name" required />
+    <input type="email" id="orderEmail" placeholder="Your email" required />
+    <textarea id="orderDetails" placeholder="Describe your custom shoes..." required></textarea>
+    <button type="submit">Place Order</button>
+  </form>
+</section>
+
+<!-- Admin Login -->
+<section id="login">
+  <h2>Admin Login</h2>
+  <form onsubmit="login(event)">
+    <input type="text" id="username" placeholder="Username" required />
+    <input type="password" id="password" placeholder="Password" required />
+    <button type="submit">Login</button>
+  </form>
+</section>
+
+<!-- Admin Panel -->
+<section id="admin">
+  <h2>Admin Panel: Orders to Make</h2>
+  <ul id="ordersList">
+    <!-- Orders will appear here -->
+  </ul>
+</section>
+
 <script>
-  const quotes = [
-    "Believe you can and you're halfway there.",
-    "Success is not final, failure is not fatal: It is the courage to continue that counts.",
-    "Don’t watch the clock; do what it does. Keep going.",
-    "The future depends on what you do today.",
-    "You are capable of amazing things.",
-    "Push yourself, because no one else is going to do it for you.",
-    "Stay positive, work hard, make it happen.",
-    "Your limitation—it’s only your imagination.",
-    "Sometimes later becomes never. Do it now.",
-    "Great things never come from comfort zones.",
-  ];
-
-  let previousMinutes = null;
-  let currentQuoteIndex = 0;
-
-  const daysNumber = document.getElementById("days-number");
-  const hoursNumber = document.getElementById("hours-number");
-  const minutesNumber = document.getElementById("minutes-number");
-  const secondsNumber = document.getElementById("seconds-number");
-  const quoteBox = document.getElementById("quote-box");
-  const motivateBtn = document.getElementById("motivate-btn");
-  const confettiEmoji = document.getElementById('confetti-emoji');
-
-  function confettiBurst(x, y) {
-    confetti({
-      particleCount: 60,
-      spread: 70,
-      origin: { x: x, y: y }
-    });
+  function showPage(id) {
+    const sections = document.querySelectorAll('section');
+    sections.forEach(section => section.classList.remove('visible'));
+    document.getElementById(id).classList.add('visible');
   }
 
-  function showQuote(index) {
-    quoteBox.classList.remove("visible");
-    setTimeout(() => {
-      quoteBox.textContent = quotes[index];
-      quoteBox.classList.add("visible");
-    }, 400);
-  }
+  const adminCredentials = {
+    username: "admin",
+    password: "super123"
+  };
 
-  function getNextFridayAt1530() {
-    const now = new Date();
-    const target = new Date(now);
+  function login(e) {
+    e.preventDefault();
+    const user = document.getElementById("username").value;
+    const pass = document.getElementById("password").value;
 
-    const dayOfWeek = now.getDay(); // 0=Sun,1=Mon,...5=Fri,6=Sat
-
-    let daysUntilFriday = (5 - dayOfWeek + 7) % 7;
-    if (daysUntilFriday === 0 && (now.getHours() > 15 || (now.getHours() === 15 && now.getMinutes() >= 30))) {
-      daysUntilFriday = 7; // If past 3:30pm Friday, go to next Friday
-    }
-
-    target.setDate(now.getDate() + daysUntilFriday);
-    target.setHours(15, 30, 0, 0);
-
-    return target;
-  }
-
-  function updateCountdown() {
-    const target = getNextFridayAt1530();
-
-    const now = new Date();
-    const diff = target - now;
-
-    if (diff < 0) {
-      daysNumber.textContent = 0;
-      hoursNumber.textContent = 0;
-      minutesNumber.textContent = 0;
-      secondsNumber.textContent = 0;
-      quoteBox.textContent = "Time's up! 🎉 You made it!";
-      return;
-    }
-
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((diff / (1000 * 60)) % 60);
-    const seconds = Math.floor((diff / 1000) % 60);
-
-    daysNumber.textContent = days;
-    hoursNumber.textContent = hours;
-    minutesNumber.textContent = minutes;
-    secondsNumber.textContent = seconds;
-
-    if (minutes !== previousMinutes) {
-      const rect = confettiEmoji.getBoundingClientRect();
-      const x = (rect.left + rect.width / 2) / window.innerWidth;
-      const y = (rect.top + rect.height / 2) / window.innerHeight;
-
-      confettiBurst(x, y);
-      previousMinutes = minutes;
-
-      currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
-      showQuote(currentQuoteIndex);
+    if (user === adminCredentials.username && pass === adminCredentials.password) {
+      alert("Login successful!");
+      showPage('admin');
+      loadOrders();
+    } else {
+      alert("Incorrect login.");
     }
   }
 
-  motivateBtn.addEventListener("click", () => {
-    currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
-    showQuote(currentQuoteIndex);
-  });
+  function saveOrder(e) {
+    e.preventDefault();
+    const name = document.getElementById("orderName").value;
+    const email = document.getElementById("orderEmail").value;
+    const details = document.getElementById("orderDetails").value;
 
-  confettiEmoji.addEventListener('mouseenter', () => {
-    const rect = confettiEmoji.getBoundingClientRect();
-    const x = (rect.left + rect.width / 2) / window.innerWidth;
-    const y = (rect.top + rect.height / 2) / window.innerHeight;
+    const order = { name, email, details };
+    let orders = JSON.parse(localStorage.getItem("superOrders")) || [];
+    orders.push(order);
+    localStorage.setItem("superOrders", JSON.stringify(orders));
 
-    confetti({
-      particleCount: 100,
-      spread: 100,
-      origin: { x: x, y: y }
-    });
-  });
+    alert("Order submitted! Thank you.");
+    document.querySelector("#order form").reset();
+  }
 
-  setInterval(updateCountdown, 1000);
-  updateCountdown();
+  function loadOrders() {
+    const list = document.getElementById("ordersList");
+    list.innerHTML = "";
+    let orders = JSON.parse(localStorage.getItem("superOrders")) || [];
+    if (orders.length === 0) {
+      list.innerHTML = "<li>No orders yet.</li>";
+    } else {
+      orders.forEach(order => {
+        const li = document.createElement("li");
+        li.innerHTML = `<strong>${order.name}</strong> (${order.email})<br>${order.details}`;
+        list.appendChild(li);
+      });
+    }
+  }
+
+  // Show homepage initially
+  showPage('home');
 </script>
 
 </body>
