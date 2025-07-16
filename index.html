@@ -1,301 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>suPER Shoes</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Countdown to August 2nd</title>
   <style>
     * {
-      margin: 0;
-      padding: 0;
       box-sizing: border-box;
     }
 
     body {
-      font-family: 'Segoe UI', sans-serif;
-    }
-
-    /* === HEADER + HOME === */
-    .landing {
-  height: 100vh;
-  background: url('https://img01.ztat.net/article/spp-media-p1/b8ceee460496417c9c41d136151a0f27/2a831b72965940f2ae1e0570f9f4cb9c.jpg?imwidth=1800&filter=packshot') no-repeat center center;
-  background-size: cover;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-    }
-
-    .logo {
-      font-size: 3rem;
-      font-weight: bold;
-      margin-bottom: 30px;
-      color: #0a2540;
-      letter-spacing: 2px;
-    }
-
-    .menu {
-      display: flex;
-      gap: 30px;
-    }
-
-    .menu a {
-      text-decoration: none;
-      padding: 15px 25px;
-      font-size: 1.2rem;
-      color: #0a2540;
-      background-color: rgba(255, 255, 255, 0.7);
-      border-radius: 10px;
-      transition: all 0.3s ease;
-    }
-
-    .menu a:hover {
-      background-color: white;
-      transform: scale(1.1);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-
-    /* === BROWSE === */
-    #browse {
-      display: none;
-      padding: 40px;
-      background: #f2f2f2;
-      min-height: 100vh;
-    }
-
-    #browse h2 {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-      max-width: 1100px;
-      margin: auto;
-    }
-
-    .product-card {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-
-   .product-card img {
-  width: 100%;
-  border-radius: 10px;
-  margin-bottom: 15px; /* Add space below image */
-    }
-
-    .product-card h3 {
-      margin: 10px 0 5px;
-    }
-
-    .product-card p {
-      margin-bottom: 10px;
-    }
-
-    .product-card select,
-    .product-card button {
-      width: 100%;
-      padding: 10px;
-      margin-top: 8px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      font-size: 1rem;
-    }
-
-    .product-card button {
-      background: black;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-
-    /* === REVIEWS === */
-    #reviews {
-      display: none;
-      padding: 40px;
-      background: #ffffff;
-      min-height: 100vh;
-    }
-
-    #reviews h2 {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    #reviewForm {
-      max-width: 600px;
-      margin: auto;
+      background: #0f172a;
+      color: #f1f5f9;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       display: flex;
       flex-direction: column;
-      gap: 15px;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      padding: 1rem;
     }
 
-    #reviewForm input,
-    #reviewForm select,
-    #reviewForm textarea,
-    #reviewForm button {
-      padding: 10px;
-      font-size: 1rem;
-      border-radius: 6px;
-      border: 1px solid #ccc;
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      text-align: center;
     }
 
-    #reviewForm button {
-      background: #0a2540;
-      color: white;
-      border: none;
-      cursor: pointer;
+    .countdown {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
     }
 
-    #reviewsList {
-      max-width: 600px;
-      margin: 40px auto;
+    .time-box {
+      background-color: #1e293b;
+      padding: 1rem 2rem;
+      border-radius: 1rem;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: default;
+      min-width: 100px;
     }
 
-    #reviewsList div {
-      margin-bottom: 20px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid #ddd;
+    .time-box:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    }
+
+    .time-box span {
+      display: block;
+      font-size: 3rem;
+      font-weight: bold;
+    }
+
+    .time-label {
+      font-size: 1.1rem;
+      margin-top: 0.5rem;
+      color: #94a3b8;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 9999;
     }
   </style>
 </head>
 <body>
-
-  <!-- === HOMEPAGE === -->
-  <div class="landing" id="home">
-    <div class="logo">suPER Shoes</div>
-    <div class="menu">
-      <a href="#" data-section="home">Home</a>
-      <a href="#" data-section="browse">Browse</a>
-      <a href="#" data-section="reviews">Reviews</a>
-      <a href="#">My Basket</a>
-      <a href="login.html">Login</a>
-    </div>
+  <h1>Countdown to August 2nd</h1>
+  <div class="countdown" id="countdown">
+    <div class="time-box" id="daysBox"><span id="days">--</span><div class="time-label">Days</div></div>
+    <div class="time-box" id="hoursBox"><span id="hours">--</span><div class="time-label">Hours</div></div>
+    <div class="time-box" id="minutesBox"><span id="minutes">--</span><div class="time-label">Minutes</div></div>
+    <div class="time-box" id="secondsBox"><span id="seconds">--</span><div class="time-label">Seconds</div></div>
   </div>
 
-  <!-- === BROWSE SECTION === -->
-  <section id="browse">
-    <h2>Browse Our Sliders</h2>
-    <div class="product-grid">
+  <!-- Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-      <!-- Product 1 -->
-      <div class="product-card">
-        <img src="https://images.unsplash.com/photo-1603808033192-0825d642f850?auto=format&fit=crop&w=500&q=80" alt="Slider 1">
-        <h3>Adapta Slide Pro</h3>
-        <p>£49.99</p>
-        <label>Color:</label>
-        <select>
-          <option>Black</option>
-          <option>White</option>
-          <option>Red</option>
-        </select>
-        <label>Size:</label>
-        <select>
-          <option>US 6</option>
-          <option>US 7</option>
-          <option>US 8</option>
-          <option>US 9</option>
-          <option>US 10</option>
-        </select>
-        <button>Add to Basket</button>
-      </div>
-
-      <!-- Product 2 -->
-      <div class="product-card">
-        <img src="https://images.unsplash.com/photo-1606115915090-7a46a2ecf4c3?auto=format&fit=crop&w=500&q=80" alt="Slider 2">
-        <h3>Cloud Comfort</h3>
-        <p>£39.99</p>
-        <label>Color:</label>
-        <select>
-          <option>Gray</option>
-          <option>Navy</option>
-          <option>Yellow</option>
-        </select>
-        <label>Size:</label>
-        <select>
-          <option>US 6</option>
-          <option>US 7</option>
-          <option>US 8</option>
-          <option>US 9</option>
-          <option>US 10</option>
-        </select>
-        <button>Add to Basket</button>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- === REVIEWS SECTION === -->
-  <section id="reviews">
-    <h2>Leave a Review</h2>
-    <form id="reviewForm">
-      <input type="text" id="reviewerName" placeholder="Your name" required />
-      <select id="reviewStars" required>
-        <option value="">Select stars</option>
-        <option value="1">⭐</option>
-        <option value="2">⭐⭐</option>
-        <option value="3">⭐⭐⭐</option>
-        <option value="4">⭐⭐⭐⭐</option>
-        <option value="5">⭐⭐⭐⭐⭐</option>
-      </select>
-      <textarea id="reviewText" rows="4" placeholder="Write your review..." required></textarea>
-      <button type="submit">Submit Review</button>
-    </form>
-
-    <div id="reviewsList">
-      <h3 style="margin-top: 40px;">Customer Reviews</h3>
-    </div>
-  </section>
-
-  <!-- === SCRIPT === -->
   <script>
-    const navLinks = document.querySelectorAll('.menu a');
-    const home = document.getElementById('home');
-    const browse = document.getElementById('browse');
-    const reviews = document.getElementById('reviews');
+    let lastMinute = null;
 
-    navLinks.forEach(link => {
-      link.addEventListener('click', function (e) {
-        e.preventDefault();
-        const section = this.getAttribute('data-section');
+    function updateCountdown() {
+      const now = new Date();
+      const currentYear = now.getFullYear();
+      let targetDate = new Date(`August 2, ${currentYear} 00:00:00`);
+      if (now > targetDate) {
+        targetDate = new Date(`August 2, ${currentYear + 1} 00:00:00`);
+      }
 
-        home.style.display = 'none';
-        browse.style.display = 'none';
-        reviews.style.display = 'none';
+      const diff = targetDate - now;
 
-        if (section === 'home') home.style.display = 'flex';
-        if (section === 'browse') browse.style.display = 'block';
-        if (section === 'reviews') reviews.style.display = 'block';
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / 1000 / 60) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById('days').textContent = days;
+      document.getElementById('hours').textContent = hours;
+      document.getElementById('minutes').textContent = minutes;
+      document.getElementById('seconds').textContent = seconds;
+
+      // Trigger confetti if the minute changed
+      if (lastMinute !== null && lastMinute !== minutes) {
+        triggerConfettiFromElement(document.getElementById('minutesBox'));
+      }
+      lastMinute = minutes;
+    }
+
+    function triggerConfettiFromElement(element) {
+      const rect = element.getBoundingClientRect();
+      const x = (rect.left + rect.width / 2) / window.innerWidth;
+      const y = (rect.top + rect.height / 2) / window.innerHeight;
+
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { x, y },
+        scalar: 0.8
       });
-    });
+    }
 
-    // Reviews logic
-    const form = document.getElementById('reviewForm');
-    const nameInput = document.getElementById('reviewerName');
-    const starInput = document.getElementById('reviewStars');
-    const textInput = document.getElementById('reviewText');
-    const reviewList = document.getElementById('reviewsList');
-
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      const name = nameInput.value.trim();
-      const stars = starInput.value;
-      const text = textInput.value.trim();
-
-      const review = document.createElement('div');
-      review.innerHTML = `<strong>${name}</strong> — ${'⭐'.repeat(Number(stars))}<br><p>${text}</p>`;
-      reviewList.appendChild(review);
-
-      form.reset();
-    });
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
   </script>
-
 </body>
 </html>
