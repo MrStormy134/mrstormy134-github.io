@@ -1,1 +1,1 @@
-# 2august-github.io
+# multiplayerwordle.io
