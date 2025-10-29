@@ -1,1 +1,55 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Multiplayer Wordle</title>
+  <style>
+    body { font-family: system-ui, Arial; margin: 16px; }
+    .board { display:flex; gap:8px; flex-wrap:wrap; max-width:540px }
+    .row { display:flex; gap:6px }
+    .cell { width:48px; height:48px; display:flex; align-items:center; justify-content:center; border:1px solid #ccc; font-weight:700; text-transform:uppercase }
+    .correct { background:#6aaa64; color:white }
+    .present { background:#c9b458; color:white }
+    .absent { background:#787c7e; color:white }
+    .players { margin-top:16px }
+  </style>
+</head>
+<body>
+  <h1>Multiplayer Wordle (demo)</h1>
 
+  <div>
+    <label>Your name: <input id="name" value="Player" /></label>
+  </div>
+
+  <div style="margin-top:10px">
+    <button id="create">Create Room</button>
+    <input id="joinCode" placeholder="ROOMCODE" style="text-transform:uppercase" />
+    <button id="join">Join Room</button>
+  </div>
+
+  <div id="roomArea" style="margin-top:16px; display:none">
+    <div>Room: <span id="roomCode"></span> — <span id="roomStatus"></span></div>
+    <div style="margin-top:8px">
+      <button id="start">Start Game (host only)</button>
+      <input id="customWord" placeholder="(optional 5-letter word for host)" />
+    </div>
+
+    <div class="players">
+      <h3>Players</h3>
+      <ul id="playersList"></ul>
+    </div>
+
+    <div style="margin-top:10px">
+      <input id="guessInput" placeholder="enter 5-letter guess" />
+      <button id="submitGuess">Submit</button>
+    </div>
+
+    <div id="boardWrapper" style="margin-top:12px"></div>
+
+    <div id="messages" style="margin-top:12px"></div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
