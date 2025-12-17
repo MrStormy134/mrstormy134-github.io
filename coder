@@ -1,0 +1,39 @@
+# mapping for characters
+encode_map = {
+    "a": "t", "b": "x", "c": "m", "d": "h", "e": "!", "f": "r", "g": "o",
+    "h": " ", "i": "p", "j": "u", "k": "q", "l": "b", "m": "y", "n": ",",
+    "o": "k", "p": "s", "q": "v", "r": "e", "s": "w", "t": "l", "u": "z",
+    "v": "a", "w": "c", "x": "g", "y": "j", "z": "f", ",": "i", ".": "d",
+    "!": "n", " ": "~"  # space swapped with ~
+}
+
+# create decode map
+decode_map = {v: k for k, v in encode_map.items()}
+
+# ask user whether to encode or decode
+mode = input("Type 'encode' to scramble a message or 'decode' to decipher: ").strip().lower()
+
+# get the message
+message = input("Enter your message (up to 100 characters): ")[:100]
+
+# select mapping
+mapping = encode_map if mode == "encode" else decode_map
+
+# build the initial mapped message
+mapped_message = "".join(mapping.get(char, char) for char in message)
+
+# properly reverse words if needed
+if mode == "encode":
+    # reverse words BEFORE encoding spaces
+    words = message.split()  # split by actual spaces
+    reversed_message = " ".join(reversed(words))
+    # now encode reversed_message
+    output_message = "".join(mapping.get(char, char) for char in reversed_message)
+else:
+    # decoding: map first, then reverse words back to correct order
+    temp_message = "".join(mapping.get(char, char) for char in message)
+    words = temp_message.replace("~", " ").split()
+    output_message = " ".join(reversed(words))
+
+print("\nResult:")
+print(output_message)
